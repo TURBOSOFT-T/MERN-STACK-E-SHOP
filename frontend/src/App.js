@@ -1,19 +1,55 @@
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  LoginPage,
+  SignupPage,
+  ActivationPage,
+  ProductsPage,
+  BestSellingPage,
+  EventsPage,
+  FAQPage,
+  HomePage,
+} from "./routes/Routes";
+ //mport { ToastContainer, toast } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
+  import { useEffect } from "react";
+import Store from "./redux/store";
+import { loadUser } from "./redux/actions/user";
+  
 
-import './App.css';
+
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       
-        <p className="text-[#000]" >
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+   useEffect(() => {
+    Store.dispatch(loadUser());
+    // Store.dispatch(loadUser());
+   //  Store.dispatch(loadSeller());
+   //  Store.dispatch(getAllProducts());
+    // Store.dispatch(getAllEvents());
+   }, []);
 
-        
-       
-      </header>
-    </div>
+
+  
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/activation/:activation_token"
+          element={<ActivationPage />}
+        />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/best-selling" element={<BestSellingPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/" acti element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
