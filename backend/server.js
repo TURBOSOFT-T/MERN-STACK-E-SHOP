@@ -1,4 +1,6 @@
+const morgan = require("morgan");
 const app = require("./app");
+const router = require("./controller/user");
 const connectDatabase = require("./db/Database");
 
 // Handling uncaught Exception
@@ -13,6 +15,9 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
     path: "backend/config/.env",
   });
 }
+app.use(morgan("dev"));
+app.use(morgan('tiny'));
+app.use("/api", router);
 
 // connect db
 connectDatabase();

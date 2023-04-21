@@ -11,7 +11,9 @@ const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated } = require("../middleware/auth");
 var multer = require("multer");
+const { token } = require("morgan");
 var upload = multer({ dest: "uploads/" });
+//const fileUpload = require("express-fileupload");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
@@ -135,7 +137,15 @@ router.post(
         );
       }
       console.log(user);
-      sendToken(user, 201, res);
+      const token = jwt.sign({ userId: user._id }, "secret-key");
+      // sendToken(user, 200, res);
+       return res.status(200).send({
+        msg: "Login Successful...!",
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        token,
+      }); 
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -144,50 +154,39 @@ router.post(
 
 ///////////////////LOGIN WITH GOOGLE/////////////////////////
 router.post(
-  "/login-user2",
-  catchAsyncErrors(async (req, res, next) =>  {
-  const { email, password } = req.body;
+  "/login-user1",
+  catchAsyncErrors(async (req, res, next) => {
+    const { email, password } = req.body;
 
-  try {
-    UserModel.findOne({ email })
-      .then((user) => {
-        bcrypt
-          .compare(password, user.password)
-          .then((passwordCheck) => {
-            if (!passwordCheck)
-              return res.status(400).send({ error: "Don't have Password" });
+    try {
+      UserModel.findOne({ email })
+        .then((user) => {
+          bcrypt
+            .compare(password, user.password)
+            .then((passwordCheck) => {
+              if (!passwordCheck)
+                return res.status(400).send({ error: "Don't have Password" });
 
-            // create jwt token
-            const token = jwt.sign(
-              {
-                userId: user._id,
+              return res.status(200).send({
+                msg: "Login Successful...!",
                 email: user.email,
-              },
-              ENV.JWT_SECRET,
-              { expiresIn: "24h" }
-            );
 
-            return res.status(200).send({
-              msg: "Login Successful...!",
-              email: user.email,
-            
-              token,
+                token,
+              });
+            })
+
+            .catch((error) => {
+              return res.status(400).send({ error: "Password does not Match" });
             });
-          })
-
-          .catch((error) => {
-            return res.status(400).send({ error: "Password does not Match" });
-          });
-      })
-      .catch((error) => {
-        return res.status(404).send({ error: "Username not Found" });
-      });
-  } catch (error) {
-    return res.status(500).send({ error });
-  }
-})
+        })
+        .catch((error) => {
+          return res.status(404).send({ error: "Username not Found" });
+        });
+    } catch (error) {
+      return res.status(500).send({ error });
+    }
+  })
 );
-
 
 ////////////////////LOGIN WITH FACEBOOK//////////////////////
 
