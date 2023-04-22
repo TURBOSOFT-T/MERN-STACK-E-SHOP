@@ -25,10 +25,10 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        toast.success("Login Success!");
-      
-        navigate("/");
-        window.location.reload(true);
+       toast.success("Login Success.!");
+       navigate("/");
+       window.location.reload(true); 
+        
       })
       .catch((err) => {
         toast.error(err.response.data.message);

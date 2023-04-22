@@ -139,13 +139,13 @@ router.post(
       console.log(user);
       const token = jwt.sign({ userId: user._id }, "secret-key");
       // sendToken(user, 200, res);
-       return res.status(200).send({
+      return res.status(200).send({
         msg: "Login Successful...!",
         id: user._id,
         name: user.name,
         email: user.email,
         token,
-      }); 
+      });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
