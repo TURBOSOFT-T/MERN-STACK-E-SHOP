@@ -7,10 +7,12 @@ const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const Shop = require("../model/shop");
 const { isAuthenticated, isSeller } = require("../middleware/auth");
-const { upload } = require("../multer");
+//const { upload } = require("../multer");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
 
 // create shop
 router.post("/create-shop", upload.single("file"), async (req, res, next) => {
@@ -65,8 +67,9 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
 });
 
 // create activation token
+const ACTIVATION_SECRET = "hfskjdweuiwe093$wew$@%W!Edfonoddfi";
 const createActivationToken = (seller) => {
-  return jwt.sign(seller, process.env.ACTIVATION_SECRET, {
+  return jwt.sign(seller, ACTIVATION_SECRET, {
     expiresIn: "5m",
   });
 };
@@ -80,7 +83,7 @@ router.post(
 
       const newSeller = jwt.verify(
         activation_token,
-        process.env.ACTIVATION_SECRET
+        process.env.ACTIVATION_SECRET || "hfskjdweuiwe093$wew$@%W!Edfonoddfi"
       );
 
       if (!newSeller) {

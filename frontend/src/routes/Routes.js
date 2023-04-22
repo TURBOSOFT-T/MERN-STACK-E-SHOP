@@ -4,10 +4,12 @@ import ActivationPage from "../pages/ActivationPage";
 import HomePage from "../pages/HomePage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
-import ProfilePage from "../pages/ProfilePage.jsx";
+import ProfilePage from "../pages/ProfilePage";
 import BestSellingPage from "../pages/BestSellingPage";
 import EventsPage from "../pages/EventsPage";
-import FAQPage from "../pages/FAQPage.jsx";
+import FAQPage from "../pages/FAQPage";
+import CheckoutPage from "../pages/CheckoutPage";
+import ShopCreatePage from "../pages/ShopCreate";
 
 
 export {
@@ -22,16 +24,18 @@ export {
   EventsPage,
   FAQPage,
   ProfilePage,
+  CheckoutPage,
+  ShopCreatePage,
+
 
   /*
    
-    EventsPage,
-    FAQPage,
+   
     CheckoutPage,
     PaymentPage,
     OrderSuccessPage,
     ProductDetailsPage,
-    ProfilePage,
+   
     ShopCreatePage,
     SellerActivationPage,
     ShopLoginPage */

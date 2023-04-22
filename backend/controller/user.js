@@ -105,7 +105,15 @@ router.post(
         password,
       });
 
-      sendToken(user, 201, res);
+     // sendToken(user, 201, res);
+      return res.status(201).send({
+        msg: "User created successfully...!",
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      
+      });
+
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -139,13 +147,13 @@ router.post(
       console.log(user);
       const token = jwt.sign({ userId: user._id }, "secret-key");
       // sendToken(user, 200, res);
-      return res.status(200).send({
+       return res.status(200).send({
         msg: "Login Successful...!",
         id: user._id,
         name: user.name,
         email: user.email,
         token,
-      });
+      }); 
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }

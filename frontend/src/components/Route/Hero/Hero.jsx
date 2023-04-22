@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
+import { IoIosArrowForward } from "react-icons/io";
 
 const Hero = () => {
   return (
@@ -23,13 +24,24 @@ const Hero = () => {
           quidem asperiores, laudantium temporibus soluta optio consequatur{" "}
           <br /> aliquam deserunt officia. Dolorum saepe nulla provident.
         </p>
-        <Link to="/products" className="inline-block">
-          <div className={`${styles.button} mt-5`}>
-            <span className="text-[#fff] font-[Poppins] text-[18px]">
-              Shop Now
-            </span>
-          </div>
-        </Link>
+        
+          <Link to="/products" className="inline-block">
+            <div className={`${styles.button} mt-5`}>
+              <span className="text-[#fff] font-[Poppins] text-[18px]">
+                Shop Now
+              </span>
+            </div>
+          </Link>
+          
+        
+
+        <div className={`${styles.button}  w-[90%] 800px:w-[13%]`}>
+          <Link to="/shop-create">
+            <h1 className="text-[#fff] flex items-center">
+              Become Seller <IoIosArrowForward className="ml-1" />
+            </h1>
+          </Link>
+        </div>
       </div>
     </div>
   );

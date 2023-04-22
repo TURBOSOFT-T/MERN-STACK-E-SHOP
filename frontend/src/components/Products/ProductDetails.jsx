@@ -50,8 +50,8 @@ const ProductDetails = ({ data }) => {
                   className="w-[80%]"
                 />
                 <div className="w-full flex">
-                 {/*  {data &&
-                    data.images.map((i, index) => (
+                   {data &&
+                    data.images?.map((i, index) => (
                       <div
                         className={`${
                           select === 0 ? "border" : "null"
@@ -64,7 +64,7 @@ const ProductDetails = ({ data }) => {
                           onClick={() => setSelect(0)}
                         />
                       </div>
-                    ))} */}
+                    ))} 
                   <div
                     className={`${
                       select === 1 ? "border" : "null"
@@ -153,7 +153,8 @@ const ProductDetails = ({ data }) => {
               </div>
             </div>
           </div>
-        {/*   <ProductDetailsInfo data={data} products={products} /> */}
+          <ProductDetailsInfo data={data}  /> 
+          <br />
           <br />
           <br />
         </div>
@@ -227,14 +228,14 @@ const ProductDetailsInfo = ({ data, products }) => {
           <div className="w-full 800px:w-[50%]">
             <Link to={`/`}>
               <div className="flex items-center">
-                <img
-                 
-                  className="w-[50px] h-[50px] rounded-full"
-                  alt=""
-                />
-                <div className="pl-3">
-                  <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
-                  <h5 className="pb-2 text-[15px]">(4/5) Ratings</h5>
+                <img src= {data.shop.shop_avatar.url} className="w-[50px] h-[50px] rounded-full" alt="" />
+                <div className="pr-8">
+                  <h3 className={`${styles.shop_name} pb-1 pt-1`}>
+                    {data.shop.name}
+                  </h3>
+                  <h5 className="pb-3 text-[15px]">
+                    {data.shop.ratings} Ratings
+                  </h5>
                 </div>
               </div>
             </Link>
@@ -243,16 +244,10 @@ const ProductDetailsInfo = ({ data, products }) => {
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
             <div className="text-left">
               <h5 className="font-[600]">
-                Joined on:{" "}
-                <span className="font-[500]">
-                
-                </span>
+                Joined on: <span className="font-[500]">04-04-20223</span>
               </h5>
               <h5 className="font-[600] pt-3">
-                Total Products:{" "}
-                <span className="font-[500]">
-                
-                </span>
+                Total Products: <span className="font-[500]">1400</span>
               </h5>
               <h5 className="font-[600] pt-3">
                 Total Reviews: <span className="font-[500]">324</span>

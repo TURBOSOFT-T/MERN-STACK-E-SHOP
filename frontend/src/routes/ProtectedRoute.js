@@ -7,18 +7,8 @@ const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated) {
       return <Navigate to="/login" replace />;
     }
-if(
-    !isAuthenticated &&
-    window.location.pathname !== "/login" &&
-    window.location.pathname !== "/signup"
-    ) {
-        return <Navigate to="/login" replace />;
-    }
     return children;
-    } else {
-    return null;
-    }
+  }
 };
 
 export default ProtectedRoute;
-

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/styles";
 import { productData, categoriesData } from "../../static/data";
-import { AiOutlineSearch, AiOutlineShoppingCart,AiOutlineHeart } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+} from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -12,13 +16,11 @@ import { useSelector } from "react-redux";
 
 import Cart from "../cart/Cart.jsx";
 import Wishlist from "../Wishlist/Wishlist.jsx";
-import { server } from "../../server";
+
 import { RxCross1 } from "react-icons/rx";
 
-
-
 const Header = (activeHeading) => {
-  const {isAuthenticated, user} = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
@@ -26,9 +28,8 @@ const Header = (activeHeading) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
-  
 
-  console.log(user)
+  console.log(user);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -45,8 +46,6 @@ const Header = (activeHeading) => {
       setActive(false);
     }
   });
-
-  
 
   return (
     <>
@@ -99,7 +98,7 @@ const Header = (activeHeading) => {
 
           {/* search box end */}
           <div className={`${styles.button}`}>
-            <Link>
+            <Link to="/shop-create">
               <h1 className="text-[#fff] flex items-center">
                 Become Seller <IoIosArrowForward className="ml-1" />
               </h1>
@@ -173,17 +172,15 @@ const Header = (activeHeading) => {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
-                      src={`${server}${user.avatar}`}
+                      src="https://shopo.quomodothemes.website/assets/images/user-1.jpg"
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
                   </Link>
                 ) : (
-                  <>
-                    <Link to="/login">
-                      <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
-                    </Link>
-                  </>
+                  <Link to="/login">
+                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                  </Link>
                 )}
               </div>
             </div>
@@ -303,7 +300,7 @@ const Header = (activeHeading) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src={`${server}${user.avatar}`}
+                        src="https://shopo.quomodothemes.website/assets/images/user-1.jpg"
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />
@@ -317,10 +314,7 @@ const Header = (activeHeading) => {
                     >
                       Login /
                     </Link>
-                    <Link
-                      to="/signup"
-                      className="text-[18px] text-[#000000b7]"
-                    >
+                    <Link to="/signup" className="text-[18px] text-[#000000b7]">
                       Sign up
                     </Link>
                   </>

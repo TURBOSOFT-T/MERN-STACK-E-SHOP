@@ -5,7 +5,6 @@ import {
   AiOutlineDelete,
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import { backend_url } from "../../server";
 import styles from "../../styles/styles";
 import { DataGrid } from "@material-ui/data-grid";
 import { Button } from "@material-ui/core";
@@ -33,7 +32,7 @@ const ProfileContent = ({ active }) => {
           <div className="flex justify-center w-full">
             <div className="relative">
               <img
-                src={`${backend_url}${user?.avatar}`}
+                src="https://shopo.quomodothemes.website/assets/images/user-1.jpg"
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
                 alt=""
               />
@@ -44,10 +43,8 @@ const ProfileContent = ({ active }) => {
           </div>
           <br />
           <br />
-          
           <div className="w-full px-5">
-            
-            <form onSubmit={handleSubmit} aria-required={true}>
+            <form onSubmit={handleSubmit} aria-required={true}> 
               <div className="w-full 800px:flex block pb-3">
                 <div className=" w-[100%] 800px:w-[50%]">
                   <label className="block pb-2">Full Name</label>
@@ -457,7 +454,7 @@ const PaymentMethod = () => {
         </div>
         <div className="pl-8 flex items-center">
           <h6 className="text-[12px] 800px:text-[unset]">1234 **** *** ****</h6>
-          <h5 className="pl-6 text-[12px] 800px:text-[unset]">08/2022</h5>
+          <h5 className="pl-6 text-[12px] 800px:text-[unset]">08/2023</h5>
         </div>
         <div className="min-w-[10%] flex items-center justify-between pl-8">
           <AiOutlineDelete size={25} className="cursor-pointer" />
@@ -489,7 +486,7 @@ const Address = () => {
           </h6>
         </div>
         <div className="pl-8 flex items-center">
-          <h6 className="text-[12px] 800px:text-[unset]">(213) 840-9416</h6>
+          <h6 className="text-[12px] 800px:text-[unset]">(216) 56399163</h6>
         </div>
         <div className="min-w-[10%] flex items-center justify-between pl-8">
           <AiOutlineDelete size={25} className="cursor-pointer" />

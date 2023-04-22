@@ -8,7 +8,7 @@
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js"
   },
-  "author": "Thomas Tuemo",
+  "author": "shahriar Sajeeb",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

@@ -13,10 +13,7 @@ const navigate = useNavigate();
     if (isAuthenticated === true) {
       console.log("Authenticated");
       navigate("/");
-    } else {
-      navigate("/signup");
-      console.log("Not authenticated");
-    }
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
