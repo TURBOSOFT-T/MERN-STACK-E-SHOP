@@ -14,7 +14,7 @@ import {
 } from "./routes/Routes";
 //mport { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+//import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { useEffect } from "react";
 import Store from "./redux/store";
 import { loadUser } from "./redux/actions/user";
@@ -47,7 +47,7 @@ function App() {
           element={<ActivationPage />}
         />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:name" element={<ProductDetailsPage />} />
+       <Route path="/product/:name" element={<ProductDetailsPage />} />
         <Route path="/best-selling" element={<BestSellingPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/faq" element={<FAQPage />} />

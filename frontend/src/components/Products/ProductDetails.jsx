@@ -5,9 +5,9 @@ import {
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllProductsShop } from "../../redux/actions/product";
+//import { getAllProductsShop } from "../../redux/actions/product";
 
 import styles from "../../styles/styles";
 
@@ -17,10 +17,10 @@ const ProductDetails = ({ data }) => {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
 
-  const { products } = useSelector((state) => state.products);
+ // const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProductsShop(data && data.shop._id));
+ //   dispatch(getAllProductsShop(data && data.shop._id));
   }, [dispatch, data]);
 
   const incrementCount = () => {
@@ -50,7 +50,7 @@ const ProductDetails = ({ data }) => {
                   className="w-[80%]"
                 />
                 <div className="w-full flex">
-                  {data &&
+                 {/*  {data &&
                     data.images.map((i, index) => (
                       <div
                         className={`${
@@ -64,7 +64,7 @@ const ProductDetails = ({ data }) => {
                           onClick={() => setSelect(0)}
                         />
                       </div>
-                    ))}
+                    ))} */}
                   <div
                     className={`${
                       select === 1 ? "border" : "null"
@@ -153,7 +153,7 @@ const ProductDetails = ({ data }) => {
               </div>
             </div>
           </div>
-          <ProductDetailsInfo data={data} products={products} />
+        {/*   <ProductDetailsInfo data={data} products={products} /> */}
           <br />
           <br />
         </div>
