@@ -35,6 +35,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
       return next(new ErrorHandler("User already exists", 400));
     }
 
+    
     const filename = req.file.filename;
     const fileUrl = path.join(filename);
 
@@ -79,13 +80,14 @@ const createActivationToken = (user) => {
 router.post(
   "/activation",
   catchAsyncErrors(async (req, res, next) => {
+    const ACTIVATION_SECRET = "hfskjdweuiwe093$wew$@%W!Edfonoddfi";
     try {
       const { activation_token } = req.body;
 
       const newUser = jwt.verify(
         activation_token,
 
-        process.env.ACTIVATION_SECRET || "hfskjdweuiwe093$wew$@%W!Edfonoddfi"
+        ACTIVATION_SECRET
       );
 
       if (!newUser) {
@@ -105,15 +107,13 @@ router.post(
         password,
       });
 
-     // sendToken(user, 201, res);
+      // sendToken(user, 201, res);
       return res.status(201).send({
         msg: "User created successfully...!",
         id: user._id,
         name: user.name,
         email: user.email,
-      
       });
-
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -144,59 +144,21 @@ router.post(
           new ErrorHandler("Please provide the correct information", 400)
         );
       }
-      console.log(user);
-      const token = jwt.sign({ userId: user._id }, "secret-key");
-      // sendToken(user, 200, res);
-       return res.status(200).send({
+      // console.log(user);
+      // const token = jwt.sign({ userId: user._id }, "secret-key");
+      sendToken(user, 200, res);
+      /*  return res.status(200).send({
         msg: "Login Successful...!",
         id: user._id,
         name: user.name,
         email: user.email,
         token,
-      }); 
+      }); */
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
   })
 );
-
-///////////////////LOGIN WITH GOOGLE/////////////////////////
-router.post(
-  "/login-user1",
-  catchAsyncErrors(async (req, res, next) => {
-    const { email, password } = req.body;
-
-    try {
-      UserModel.findOne({ email })
-        .then((user) => {
-          bcrypt
-            .compare(password, user.password)
-            .then((passwordCheck) => {
-              if (!passwordCheck)
-                return res.status(400).send({ error: "Don't have Password" });
-
-              return res.status(200).send({
-                msg: "Login Successful...!",
-                email: user.email,
-
-                token,
-              });
-            })
-
-            .catch((error) => {
-              return res.status(400).send({ error: "Password does not Match" });
-            });
-        })
-        .catch((error) => {
-          return res.status(404).send({ error: "Username not Found" });
-        });
-    } catch (error) {
-      return res.status(500).send({ error });
-    }
-  })
-);
-
-////////////////////LOGIN WITH FACEBOOK//////////////////////
 
 // load user
 router.get(

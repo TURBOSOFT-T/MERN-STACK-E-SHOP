@@ -1,4 +1,4 @@
-/* import { createReducer } from "@reduxjs/toolkit";
+ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: true,
@@ -22,4 +22,4 @@ export const sellerReducer = createReducer(initialState, {
     state.error = null;
   },
 });
- */
+ 

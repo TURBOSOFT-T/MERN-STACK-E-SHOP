@@ -2,17 +2,21 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 const fs = require("fs");
-const jwt = require("jsonwebtoken");
+
 const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const Shop = require("../model/shop");
 const { isAuthenticated, isSeller } = require("../middleware/auth");
-//const { upload } = require("../multer");
+const { upload } = require("../multer");
+const jwt = require("jsonwebtoken");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
-var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
+const { token } = require("morgan");
+const shop = require("../model/shop");
+//const shop = require("../model/shop");
+//var multer = require("multer");
+//var upload = multer({ dest: "uploads/" });
 
 // create shop
 router.post("/create-shop", upload.single("file"), async (req, res, next) => {
@@ -78,13 +82,11 @@ const createActivationToken = (seller) => {
 router.post(
   "/activation",
   catchAsyncErrors(async (req, res, next) => {
+    const ACTIVATION_SECRET = "hfskjdweuiwe093$wew$@%W!Edfonoddfi";
     try {
       const { activation_token } = req.body;
 
-      const newSeller = jwt.verify(
-        activation_token,
-        process.env.ACTIVATION_SECRET || "hfskjdweuiwe093$wew$@%W!Edfonoddfi"
-      );
+      const newSeller = jwt.verify(activation_token, ACTIVATION_SECRET);
 
       if (!newSeller) {
         return next(new ErrorHandler("Invalid token", 400));
@@ -97,6 +99,7 @@ router.post(
       if (seller) {
         return next(new ErrorHandler("User already exists", 400));
       }
+      console.log(seller);
 
       seller = await Shop.create({
         name,
@@ -107,8 +110,12 @@ router.post(
         address,
         phoneNumber,
       });
-
-      sendShopToken(seller, 201, res);
+      // console.log(seller);
+      // sendShopToken(seller, 201, res);
+      return res.status(201).json({
+        success: true,
+        message: "Account has been activated!",
+      });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -140,7 +147,14 @@ router.post(
         );
       }
 
-      sendShopToken(user, 201, res);
+        sendShopToken(user, 201, res);
+     /*  const token = user.getJwtToken();
+      console.log(user);
+      return res.status(201).json({
+        success: true,
+        message: "Login successful!",
+        token,
+      }); */
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -149,10 +163,11 @@ router.post(
 
 // load shop
 router.get(
-  "/getSeller",
+  "/getSeller/",
   isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
+      console.log(req.seller);
       const seller = await Shop.findById(req.seller._id);
 
       if (!seller) {
@@ -168,6 +183,7 @@ router.get(
     }
   })
 );
+
 
 // log out from shop
 router.get(
@@ -200,6 +216,7 @@ router.get(
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
+      
     }
   })
 );

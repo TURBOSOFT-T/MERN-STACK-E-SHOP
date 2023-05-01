@@ -12,6 +12,7 @@ export const loadUser = () => async(dispatch) => {
             type: "LoadUserSuccess",
             payload: data.user,
         });
+        console.log(data);
     } catch (error) {
         dispatch({
             type: "LoadUserFail",
@@ -21,7 +22,7 @@ export const loadUser = () => async(dispatch) => {
 }
 
 // load seller
-/* export const loadSeller = () => async (dispatch) => {
+ export const loadSeller = () => async (dispatch) => {
     try {
       dispatch({
         type: "LoadSellerRequest",
@@ -29,6 +30,7 @@ export const loadUser = () => async(dispatch) => {
       const { data } = await axios.get(`${server}/shop/getSeller`, {
         withCredentials: true,
       });
+      console.log(data);
       dispatch({
         type: "LoadSellerSuccess",
         payload: data.seller,
@@ -40,4 +42,4 @@ export const loadUser = () => async(dispatch) => {
       });
     }
   };
-   */
+    

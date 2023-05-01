@@ -1,5 +1,4 @@
-
-const express = require("express", "morgan");
+const express = require("express");
 const ErrorHandler = require("./middleware/error");
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -8,7 +7,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 app.use(express.json());
 app.use(cookieParser());
-
 
 app.use(
   cors({
@@ -40,8 +38,6 @@ app.use("/api/v2/shop", shop);
 app.use("/api/v2/product", product);
 app.use("/api/v2/event", event);
 app.use("/api/v2/coupon", coupon);
-
-
 
 // it's for ErrorHandling
 app.use(ErrorHandler);

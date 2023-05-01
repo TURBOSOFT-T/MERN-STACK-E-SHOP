@@ -9,7 +9,7 @@ const Hero = () => {
       className={`relative min-h-[70vh] 800px:min-h-[80vh] w-full bg-no-repeat ${styles.noramlFlex}`}
       style={{
         backgroundImage:
-          "url(https://themes.rslahmed.dev/rafcart/assets/images/banner-2.jpg)",
+          "url(https://themes.rslahmed.dev/rafcart/assets/images/banner-1.jpg)",  //1,2,3
       }}
     >
       <div className={`${styles.section} w-[90%] 800px:w-[60%]`}>
@@ -24,16 +24,14 @@ const Hero = () => {
           quidem asperiores, laudantium temporibus soluta optio consequatur{" "}
           <br /> aliquam deserunt officia. Dolorum saepe nulla provident.
         </p>
-        
-          <Link to="/products" className="inline-block">
-            <div className={`${styles.button} mt-5`}>
-              <span className="text-[#fff] font-[Poppins] text-[18px]">
-                Shop Now
-              </span>
-            </div>
-          </Link>
-          
-        
+
+        <Link to="/products" className="inline-block">
+          <div className={`${styles.button} mt-5`}>
+            <span className="text-[#fff] font-[Poppins] text-[18px]">
+              Shop Now
+            </span>
+          </div>
+        </Link>
 
         <div className={`${styles.button}  w-[90%] 800px:w-[13%]`}>
           <Link to="/shop-create">

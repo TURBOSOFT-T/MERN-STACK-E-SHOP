@@ -18,6 +18,7 @@ import Cart from "../cart/Cart.jsx";
 import Wishlist from "../Wishlist/Wishlist.jsx";
 
 import { RxCross1 } from "react-icons/rx";
+import { backend_url } from "../../server";
 
 const Header = (activeHeading) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -28,8 +29,9 @@ const Header = (activeHeading) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  
 
-  console.log(user);
+  
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
@@ -54,7 +56,8 @@ const Header = (activeHeading) => {
           <div>
             <Link to="/">
               <img
-                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+                src="https://shopo.quomodothemes.website/assets/images/logo-3.svg"
+                srs="../logo.png"
                 alt=""
               />
             </Link>
@@ -115,7 +118,7 @@ const Header = (activeHeading) => {
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
         >
           {/* categories */}
-          <div>
+          <div onClick={() => setDropDown(!dropDown)}>
             <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
               <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
               <button
@@ -124,6 +127,7 @@ const Header = (activeHeading) => {
                 All Categories
               </button>
               <IoIosArrowDown
+                size={20}
                 className="absolute right-2 top-4 cursor-pointer"
                 onClick={() => setDropDown(!dropDown)}
               />
@@ -169,10 +173,23 @@ const Header = (activeHeading) => {
             </div>
             <div className={`${styles.noramlFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
+                {/*  {isAuthenticated ? (
+                  <Link to="/profile">
+                    <img
+                      src={`${backend_url}${user.avatar}`}
+                      className="w-[35px] h-[35px] rounded-full"
+                      alt=""
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/login">
+                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                  </Link>
+                )} */}
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
-                      src="https://shopo.quomodothemes.website/assets/images/user-1.jpg"
+                      src={`${backend_url}${user?.avatar}`}
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -223,7 +240,7 @@ const Header = (activeHeading) => {
           <div>
             <div className="relative mr-[20px]">
               <AiOutlineShoppingCart size={30} />
-              <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
+              <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
                 1
               </span>
             </div>
@@ -300,7 +317,7 @@ const Header = (activeHeading) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src="https://shopo.quomodothemes.website/assets/images/user-1.jpg"
+                        src={`${backend_url}${user?.avatar}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />

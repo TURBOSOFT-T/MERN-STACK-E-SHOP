@@ -3,6 +3,7 @@ import Header from "../components/Layout/Header";
 import styles from "../styles/styles";
 import ProfileSideBar from "../components/Profile/ProfileSidebar";
 import ProfileContent from "../components/Profile/ProfileContent";
+import Footer from "../components/Layout/Footer";
 
 const ProfilePage = () => {
   const [active, setActive] = useState(1);
@@ -16,6 +17,7 @@ const ProfilePage = () => {
         </div>
         <ProfileContent active={active} />
       </div>
+      <Footer />
     </div>
   );
 };

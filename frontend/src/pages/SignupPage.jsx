@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import Singup from "../components/Singup/Singup";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Header from '../components/Layout/Header';
+import Footer from '../components/Layout/Footer';
 
 
 
@@ -18,7 +20,9 @@ const navigate = useNavigate();
   }, []);
   return (
     <div>
+      <Header />
      <Singup />
+     <Footer />
     </div>
   );
 };

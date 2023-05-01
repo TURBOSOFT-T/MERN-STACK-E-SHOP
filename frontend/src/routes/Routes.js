@@ -10,6 +10,9 @@ import EventsPage from "../pages/EventsPage";
 import FAQPage from "../pages/FAQPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import ShopCreatePage from "../pages/ShopCreate";
+import SellerActivationPage from "../pages/SellerActivationPage";
+import ShopLoginPage from "../pages/ShopLoginPage";
+
 
 
 export {
@@ -18,7 +21,6 @@ export {
   ActivationPage,
   HomePage,
   ProductsPage,
- // OrderSuccessPage,
   ProductDetailsPage,
   BestSellingPage,
   EventsPage,
@@ -26,17 +28,8 @@ export {
   ProfilePage,
   CheckoutPage,
   ShopCreatePage,
+  SellerActivationPage,
+  ShopLoginPage,  
 
-
-  /*
-   
-   
-    CheckoutPage,
-    PaymentPage,
-    OrderSuccessPage,
-    ProductDetailsPage,
-   
-    ShopCreatePage,
-    SellerActivationPage,
-    ShopLoginPage */
+ 
 };

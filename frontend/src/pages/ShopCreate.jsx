@@ -7,13 +7,14 @@ import Footer from "../components/Layout/Footer";
 
 const ShopCreatePage = () => {
   const navigate = useNavigate();
-  // const { isSeller, seller } = useSelector((state) => state.seller);
+  const { isSeller, seller } = useSelector((state) => state.seller);
 
   useEffect(() => {
-    /*  if (isSeller === true) {
+    if (isSeller === true) {
       navigate(`/shop/${seller._id}`);
-    } */
+    }
   }, []);
+
   return (
     <div>
       <Header />

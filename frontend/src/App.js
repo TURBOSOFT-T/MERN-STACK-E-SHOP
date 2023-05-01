@@ -13,26 +13,24 @@ import {
   HomePage,
   ProfilePage,
   ShopCreatePage,
+  SellerActivationPage,
+  ShopLoginPage,
 } from "./routes/Routes";
-//mport { ToastContainer, toast } from "react-toastify";
+import { ShopDashboardPage, ShopCreateProduct } from "./routes/ShopRoutes";
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { useEffect } from "react";
 import { ShopHomePage } from "./ShopRoutes.js";
+import SellerProtectedRoute from "./routes/SellerProtectedRoute";
 import Store from "./redux/store";
-import { loadUser } from "./redux/actions/user";
+import { loadSeller, loadUser } from "./redux/actions/user";
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
 
 function App() {
-
-  const {  isAuthenticated } = useSelector((state) => state.user);
-
   useEffect(() => {
-  
     Store.dispatch(loadUser());
-    // Store.dispatch(loadUser());
-    //  Store.dispatch(loadSeller());
+    Store.dispatch(loadSeller());
+
     //  Store.dispatch(getAllProducts());
     // Store.dispatch(getAllEvents());
   }, []);
@@ -43,19 +41,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        {/* <Route
-          path="/profile"
-          element={
-            
-            <ProtectedRoute isAuthenticated={isAuthenticated} >
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        /> */}
         <Route path="/profile" element={<ProfilePage />} />
+
         <Route
           path="/activation/:activation_token"
           element={<ActivationPage />}
+        />
+        <Route
+          path="/seller/activation/:activation_token"
+          element={<SellerActivationPage />}
         />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/product/:name" element={<ProductDetailsPage />} />
@@ -72,11 +66,36 @@ function App() {
         />
         {/* shop Routes */}
         <Route path="/shop-create" element={<ShopCreatePage />} />
-        <Route path="/" acti element={<LoginPage />} />
+        <Route path="/shop-login" element={<ShopLoginPage />} />
+        <Route
+          path="/shop/:id"
+          element={
+            <SellerProtectedRoute>
+              <ShopHomePage />
+            </SellerProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard-create-product"
+          element={
+            <SellerProtectedRoute>
+              <ShopCreateProduct />
+            </SellerProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <SellerProtectedRoute>
+              <ShopDashboardPage />
+            </SellerProtectedRoute>
+          }
+        />
       </Routes>
       <ToastContainer
         position="bottom-center"
-        autoClose={10000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
