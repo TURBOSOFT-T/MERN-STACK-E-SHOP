@@ -48,7 +48,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     };
 
     const newUser = await User.create(user);
- ;
+ 
     console.log(newUser);
     
 
@@ -104,7 +104,7 @@ router.post(
       let user = await User.findOne({ email });
 
       if (user) {
-        return next(new ErrorHandler("User already exists", 400));
+        return next(new ErrorHandler("User already exists.........", 400));
       }
  /*      user = await User.create({
         name,
@@ -199,7 +199,7 @@ router.get(
       });
       res.status(201).json({
         success: true,
-        message: "Log out successful!",
+        message: "Log out successful!....................",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));

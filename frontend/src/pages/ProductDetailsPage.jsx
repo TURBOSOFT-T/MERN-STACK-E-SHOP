@@ -14,6 +14,7 @@ const ProductDetailsPage = () => {
   const { name } = useParams();
   const [data, setData] = useState(null);
   const productName = name.replace(/-/g, " ").trim();
+  console.log(name);;
 
   useEffect(() => {
     const product = productData.find((item) => item.name === productName);
