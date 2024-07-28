@@ -22,6 +22,12 @@ const Cart = ({ setOpenCart }) => {
       description: "test",
       price: 645,
     },
+
+    {
+      name: "Iphone 14 pro max 256 gb ssd and 8gb ram sliver colour",
+      description: "test",
+      price: 64544,
+    },
   ];
   return (
     <div className="fixed top-0 left-0 w-full bg-[#0000004b] h-screen z-10">

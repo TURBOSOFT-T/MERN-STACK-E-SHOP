@@ -50,6 +50,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     const newUser = await User.create(user);
  ;
     console.log(newUser);
+    
 
     //const activationToken = createActivationToken(user);
 
