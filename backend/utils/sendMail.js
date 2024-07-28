@@ -6,13 +6,13 @@ const sendMail = async (options) => {
     port: process.env.SMTP_PORT || 587,
     service: process.env.SMPT_SERVICE || "mail51.lwspanel.com",
     auth: {
-      user: "resetpassword@turbosoft-freelancer.com",
-      pass: "Tt@123456789",
+      user: "thomas@jklconsulting.online",
+      pass: "Thomas@0000",
     },
   });
 
   const mailOptions = {
-    from: "resetpassword@turbosoft-freelancer.com",
+    from: "thomas@jklconsulting.online",
     to: options.email,
     subject: options.subject,
     text: options.message,
