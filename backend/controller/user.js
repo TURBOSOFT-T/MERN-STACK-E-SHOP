@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const User = require("../model/user");
 const router = express.Router();
-//const { upload } = require("../multer");
+const { upload } = require("../multer");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const fs = require("fs");
@@ -12,7 +12,7 @@ const sendToken = require("../utils/jwtToken");
 const { isAuthenticated } = require("../middleware/auth");
 var multer = require("multer");
 const { token } = require("morgan");
-var upload = multer({ dest: "uploads/" });
+//var upload = multer({ dest: "uploads/" });
 //const fileUpload = require("express-fileupload");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
@@ -22,6 +22,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     if (userEmail) {
       const filename = req.file.filename;
+
       const filePath = `uploads/${filename}`;
       fs.unlink(filePath, (err) => {
         if (err) {
@@ -46,9 +47,13 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
       avatar: fileUrl,
     };
 
-    const activationToken = createActivationToken(user);
+    const newUser = await User.create(user);
+ ;
+    console.log(newUser);
 
-    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+    //const activationToken = createActivationToken(user);
+
+    //const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -100,12 +105,12 @@ router.post(
       if (user) {
         return next(new ErrorHandler("User already exists", 400));
       }
-      user = await User.create({
+ /*      user = await User.create({
         name,
         email,
         avatar,
         password,
-      });
+      }); */
 
       // sendToken(user, 201, res);
       return res.status(201).send({
